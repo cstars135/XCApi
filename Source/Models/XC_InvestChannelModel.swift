@@ -10,21 +10,34 @@ import Foundation
 import SwiftyJSON
 
 public class XC_InvestChannelDataSource {
-    var data = [InvestChannelModel]()
+    var data = [XC_InvestChannelModel]()
     
     func removeAll() {
         data.removeAll()
     }
     
     func append(items: [Any]) {
-        self.data.append(contentsOf: items as! [InvestChannelModel])
+        self.data.append(contentsOf: items as! [XC_InvestChannelModel])
     }
 }
 
-public class InvestChannelModel {
+public class XC_InvestChannelModel: Model {
     public var company: Company?
     public var investors = [Investor]()
     
+    public static func formatter(json: JSON) -> [Model] {
+        var items = [Any]()
+        for (_, subjson): (String, JSON) in json["data"] {
+            let model = XC_InvestChannelModel()
+            model.company = XC_InvestChannelModel.Company(json: subjson["company"])
+            for (_, investor_json): (String, JSON) in subjson["investor"] {
+                model.investors.append(XC_InvestChannelModel.Investor(json: investor_json))
+            }
+            items.append(model)
+        }
+        return items as! [Model]
+    }
+
     public struct Company {
         let sum: String
         let i_id: Int

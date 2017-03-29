@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 import CoreGraphics
 
-struct XC_ProductFoldItem: FoldItem {
+public struct XC_ProductFoldItem: FoldItem {
     let p_id: Int
     let p_cn: String
     let p_en: String
@@ -24,11 +24,11 @@ struct XC_ProductFoldItem: FoldItem {
     var keyCount: Int
     let inId: String
     let inName: String
-    var news: UnfoldItem?
+    public var news: UnfoldItem?
     //展开时全部分类的数据
-    var unfoldItems: [UnfoldSection]?
+    public var unfoldItems: [UnfoldSection]?
     
-    init(json: JSON) {
+    public init(json: JSON) {
         p_id = json["p_id"].intValue
         p_cn = json["p_cn"].stringValue
         p_en = json["p_en"].stringValue
@@ -45,16 +45,17 @@ struct XC_ProductFoldItem: FoldItem {
     }
     
     //Mark: - view model
-    var iconUrl: URL? {
+    public var iconUrl: URL? {
         return URL(string: p_logo)
     }
     
-    var leftFirstTitle: String {
+    public var leftFirstTitle: String {
         get {
             return inName.with(placeholder: placeholderStr)
         }
     }
-    var leftSecondTitle: String {
+    
+    public var leftSecondTitle: String {
         get {
             if !p_cn.isEmpty && !p_en.isEmpty {
                 return p_cn == p_en ? p_cn : p_cn + ": " + p_en
@@ -68,9 +69,9 @@ struct XC_ProductFoldItem: FoldItem {
         }
     }
     
-    var leftLineTopTitle: String? = nil
+    public var leftLineTopTitle: String? = nil
     
-    var leftBottomTitle: String {
+    public var leftBottomTitle: String {
         get {
             
             if !keyCnname.isEmpty && !keyEnname.isEmpty {

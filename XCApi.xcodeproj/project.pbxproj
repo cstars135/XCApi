@@ -14,7 +14,6 @@
 		3956359A1E7FC172009C1D4A /* XCApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 395635981E7FC172009C1D4A /* XCApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3956359E1E7FC84C009C1D4A /* ServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3956359D1E7FC84C009C1D4A /* ServerConfig.swift */; };
 		395635A51E7FDD85009C1D4A /* FetchDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395635A41E7FDD85009C1D4A /* FetchDataError.swift */; };
-		395635A71E80FF8F009C1D4A /* DataPipeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395635A61E80FF8E009C1D4A /* DataPipeLine.swift */; };
 		398CAA151E8A7CDF0075A2A7 /* PublicConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398CAA141E8A7CDF0075A2A7 /* PublicConstants.swift */; };
 		398CAA171E8A7CFE0075A2A7 /* UtiliFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398CAA161E8A7CFE0075A2A7 /* UtiliFuncs.swift */; };
 		398CAA191E8A7D8B0075A2A7 /* XC_TextStyleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398CAA181E8A7D8B0075A2A7 /* XC_TextStyleExtension.swift */; };
@@ -60,7 +59,6 @@
 		395635981E7FC172009C1D4A /* XCApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCApi.h; sourceTree = "<group>"; };
 		3956359D1E7FC84C009C1D4A /* ServerConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerConfig.swift; sourceTree = "<group>"; };
 		395635A41E7FDD85009C1D4A /* FetchDataError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchDataError.swift; sourceTree = "<group>"; };
-		395635A61E80FF8E009C1D4A /* DataPipeLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataPipeLine.swift; sourceTree = "<group>"; };
 		398CAA141E8A7CDF0075A2A7 /* PublicConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicConstants.swift; sourceTree = "<group>"; };
 		398CAA161E8A7CFE0075A2A7 /* UtiliFuncs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtiliFuncs.swift; sourceTree = "<group>"; };
 		398CAA181E8A7D8B0075A2A7 /* XC_TextStyleExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XC_TextStyleExtension.swift; sourceTree = "<group>"; };
@@ -149,7 +147,6 @@
 				395635971E7FC172009C1D4A /* Info.plist */,
 				395635981E7FC172009C1D4A /* XCApi.h */,
 				3956359D1E7FC84C009C1D4A /* ServerConfig.swift */,
-				395635A61E80FF8E009C1D4A /* DataPipeLine.swift */,
 				39D2815A1E84F8B2005AD35B /* Service.swift */,
 				395635A11E7FDC5F009C1D4A /* Models */,
 			);
@@ -408,7 +405,6 @@
 				392F23251E8267A3002D7AD8 /* XC_CompanyModel.swift in Sources */,
 				398CAA171E8A7CFE0075A2A7 /* UtiliFuncs.swift in Sources */,
 				392F23271E826963002D7AD8 /* XC_FoldingUIModel.swift in Sources */,
-				395635A71E80FF8F009C1D4A /* DataPipeLine.swift in Sources */,
 				39D2815B1E84F8B2005AD35B /* Service.swift in Sources */,
 				39D28CA71E8A2689006C033C /* XC_PersonageModel.swift in Sources */,
 				398CAA151E8A7CDF0075A2A7 /* PublicConstants.swift in Sources */,

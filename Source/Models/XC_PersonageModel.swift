@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-struct XC_PersonageFoldItem: FoldItem {
+public struct XC_PersonageFoldItem: FoldItem {
     let k_id: Int
     let k_cn: String
     let k_en: String
@@ -21,10 +21,10 @@ struct XC_PersonageFoldItem: FoldItem {
     let business: String
     let in_id: Int
     
-    var news: UnfoldItem?
-    var unfoldItems: [UnfoldSection]?
+    public var news: UnfoldItem?
+    public var unfoldItems: [UnfoldSection]?
     
-    init(json: JSON) {
+    public init(json: JSON) {
         k_id = json["k_id"].intValue
         k_cn = json["k_cn"].stringValue
         k_en = json["k_en"].stringValue
@@ -38,16 +38,17 @@ struct XC_PersonageFoldItem: FoldItem {
     }
     
     //Mark: - view model
-    var iconUrl: URL? {
+    public var iconUrl: URL? {
         return URL(string: k_logo)
     }
     
-    var leftFirstTitle: String {
+    public var leftFirstTitle: String {
         get {
             return kinfo_one.with(placeholder: placeholderStr)
         }
     }
-    var leftSecondTitle: String {
+    
+    public var leftSecondTitle: String {
         get{
             if !k_cn.isEmpty {
                 return k_cn
@@ -59,7 +60,7 @@ struct XC_PersonageFoldItem: FoldItem {
         }
     }
     
-    var leftLineTopTitle: String? {
+    public var leftLineTopTitle: String? {
         get {
             if !k_en.isEmpty && k_cn != k_en {
                 return k_en
@@ -68,7 +69,7 @@ struct XC_PersonageFoldItem: FoldItem {
         }
     } //若没有紧挨分割线的标题则为返回nil
     
-    var leftBottomTitle: String {
+    public var leftBottomTitle: String {
         get{
             let post = (company + business).isEmpty ? placeholderStr : (company.isEmpty ? business : company + business)
             return post + " (来自: " + kinfo_country.with(placeholder: placeholderStr) + ")"
@@ -136,7 +137,7 @@ struct XC_PersonageFoldItem: FoldItem {
     }
 }
 
-class XC_PersonageDataSource: XC_FoldingDataSource{
+public class XC_PersonageDataSource: XC_FoldingDataSource{
     func create() -> XC_FoldingDataSource {
         return XC_PersonageDataSource()
     }

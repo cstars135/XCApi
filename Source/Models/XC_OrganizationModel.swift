@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-struct XC_OrganizationFoldItem: FoldItem {
+public struct XC_OrganizationFoldItem: FoldItem {
     let k_id: Int
     let k_cn: String
     let k_en: String
@@ -22,11 +22,11 @@ struct XC_OrganizationFoldItem: FoldItem {
     let inName: String
     let country: String
     
-    var news: UnfoldItem?
+    public var news: UnfoldItem?
     //展开时全部分类的数据
-    var unfoldItems: [UnfoldSection]?
+    public var unfoldItems: [UnfoldSection]?
     
-    init(json: JSON) {
+    public init(json: JSON) {
         k_id = json["k_id"].intValue
         k_cn = json["k_cn"].stringValue
         k_en = json["k_en"].stringValue
@@ -41,16 +41,17 @@ struct XC_OrganizationFoldItem: FoldItem {
     }
     
     //Mark: - view model
-    var iconUrl: URL? {
+    public var iconUrl: URL? {
         return URL(string: k_logo)
     }
     
-    var leftFirstTitle: String {
+    public var leftFirstTitle: String {
         get {
             return kinfo_one.with(placeholder: placeholderStr)
         }
     }
-    var leftSecondTitle: String {
+    
+    public var leftSecondTitle: String {
         get{
             if !k_cn.isEmpty {
                 return k_cn
@@ -62,7 +63,7 @@ struct XC_OrganizationFoldItem: FoldItem {
         }
     }
     
-    var leftLineTopTitle: String? {
+    public var leftLineTopTitle: String? {
         get{
             if !k_en.isEmpty && k_cn != k_en {
                 return k_en
@@ -72,11 +73,12 @@ struct XC_OrganizationFoldItem: FoldItem {
         }
     } //若没有紧挨分割线的标题则为返回nil
     
-    var leftBottomTitle: String {
+    public var leftBottomTitle: String {
         get{
             return kinfo_country
         }
     }
+    
     public static func formatter(json: JSON) -> [Model] {
         var foldItems = [XC_OrganizationFoldItem]()
         for (_, foldJson):(String, JSON) in  json["data"] {
@@ -138,7 +140,7 @@ struct XC_OrganizationFoldItem: FoldItem {
     }
 }
 
-class XC_OrganizationDataSource: XC_FoldingDataSource{
+public class XC_OrganizationDataSource: XC_FoldingDataSource{
     func create() -> XC_FoldingDataSource {
         return XC_OrganizationDataSource()
     }

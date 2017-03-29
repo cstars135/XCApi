@@ -24,8 +24,8 @@ extension Array {
     }
 }
 
-protocol DataChannelItem {
-    var dataType: DataChannelModel.DataStyle { get }
+public protocol XC_DataChannelItemType: Model {
+    var dataType: XC_DataChannelDataSource.DataStyle { get }
     var type: Int { get }
     
     func numberOfRows() -> Int
@@ -34,28 +34,50 @@ protocol DataChannelItem {
     func subTitle() -> String
 }
 
-extension DataChannelItem {
-    var dataType: DataChannelModel.DataStyle {
-        return DataChannelModel.dataType(type: self.type)
+public extension XC_DataChannelItemType {
+    public var dataType: XC_DataChannelDataSource.DataStyle {
+        return XC_DataChannelDataSource.dataType(type: self.type)
     }
 }
 
-class DataChannelModel {
-    var data = [DataChannelItem]()
+
+public class XC_DataChannelFormatterItem: Model {
+    public static func formatter(json: JSON) -> [Model] {
+        var items = [Any]()
+        for (_, subjson): (String, JSON) in json["data"] {
+            let type = XC_DataChannelDataSource.dataType(type: subjson["type"].intValue)
+            var item: XC_DataChannelItemType
+            switch type {
+            case .basic:
+                item = XC_DataChannelDataSource.DataBasicModel(json: subjson)
+            case .singleGroup:
+                item = XC_DataChannelDataSource.DataSingleGroupModel(json: subjson)
+            case .mutiGroup:
+                item = XC_DataChannelDataSource.DataMutiGroupModel(json: subjson)
+            }
+            items.append(item)
+        }
+        return items as! [Model]
+    }
+}
+
+
+public class XC_DataChannelDataSource {
+    public var data = [XC_DataChannelItemType]()
     
-    func removeAll() {
+    public func removeAll() {
         self.data.removeAll()
     }
     
-    func append(items: [Any]) {
-        self.data.append(contentsOf: items as! [DataChannelItem])
+    public func append(items: [Any]) {
+        self.data.append(contentsOf: items as! [XC_DataChannelItemType])
     }
     
-    enum DataStyle {
+    public enum DataStyle {
         case basic, singleGroup, mutiGroup
     }
     
-    static func dataType(type: Int) -> DataStyle {
+    public static func dataType(type: Int) -> DataStyle {
         if type == 14 {
             return .basic
         } else if type == 15 {
@@ -65,7 +87,8 @@ class DataChannelModel {
         }
     }
     
-    struct DataBasicModel: DataChannelItem {
+    
+    class DataBasicModel: XC_DataChannelFormatterItem, XC_DataChannelItemType {
         let type: Int
         let k_cn: String
         let k_en: String
@@ -131,7 +154,7 @@ class DataChannelModel {
         }
     }
     
-    struct DataSingleGroupModel: DataChannelItem {
+    public class DataSingleGroupModel: XC_DataChannelFormatterItem, XC_DataChannelItemType {
         struct singleRowItem {
             let p_cn: String
             let p_en: String
@@ -178,7 +201,7 @@ class DataChannelModel {
             }
         }
         
-        let type: Int
+        public let type: Int
         let dg_wh: String
         let name: String
         let cl_id2: String
@@ -214,19 +237,19 @@ class DataChannelModel {
                 }) + CGFloat(headerH) + 10
         }
         
-        func numberOfRows() -> Int {
+        public func numberOfRows() -> Int {
             return self.rows.count
         }
         
-        func numberOfSections() -> Int {
+        public func numberOfSections() -> Int {
             return 1
         }
         
-        func mainTitle() -> String {
+        public func mainTitle() -> String {
             return name.with(placeholder: placeholderStr)
         }
         
-        func subTitle() -> String {
+        public func subTitle() -> String {
             let dg_wh = self.dg_wh.with(placeholder: placeholderStr)
             let time = self.time.with(placeholder: placeholderStr)
             let cl_id2 = self.cl_id2.with(placeholder: placeholderStr)
@@ -234,7 +257,7 @@ class DataChannelModel {
         }
     }
 
-    struct DataMutiGroupModel: DataChannelItem {
+    public class DataMutiGroupModel: XC_DataChannelFormatterItem, XC_DataChannelItemType {
         struct singleRowItem {
             let p_cn: String
             let p_en: String
@@ -262,7 +285,7 @@ class DataChannelModel {
             }
         }
         
-        let type: Int
+        public let type: Int
         let dg_name: String
         let time: String
         let dg_l: String //地区
@@ -403,26 +426,26 @@ class DataChannelModel {
         }
 
         
-        func numberOfRows() -> Int {
+        public func numberOfRows() -> Int {
             return self.rows.count
         }
         
-        func numberOfSections() -> Int {
+        public func numberOfSections() -> Int {
             return self.tables.count
         }
         
-        func mainTitle() -> String {
+        public func mainTitle() -> String {
             return dg_name.with(placeholder: placeholderStr)
         }
         
-        func subTitle() -> String {
+        public func subTitle() -> String {
             let dg_l = self.dg_l.with(placeholder: placeholderStr)
             let time = self.time.with(placeholder: placeholderStr)
             let cl_id2 = self.cl_id2.with(placeholder: placeholderStr)
             return "地区: " + dg_l + " /  时间: " + time + " / 单位: " + cl_id2
         }
         
-        func rowH(at: Int) -> CGFloat {
+        public func rowH(at: Int) -> CGFloat {
             return 0
         }
     }
